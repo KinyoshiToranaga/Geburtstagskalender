@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Geburtstagskalender.Uc_AddUser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Geburtstagskalender"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <ContentControl x:Name="cc_AddUser">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Grid.Row="0" Source="C:\Users\thhofmann\Downloads\nein-426204-1.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto"/>
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,20,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" x:Name="lbl_Strasse">Strasse:</Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="txt_Strasse"></TextBox>
+                    <Label Grid.Row="1" Grid.Column="0" x:Name="lbl_Ort">Ort:</Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="txt_Ort"></TextBox>
+                    <Label Grid.Row="2" Grid.Column="0" x:Name="lbl_PLZ">PLZ:</Label>
+                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="txt_PLZ"></TextBox>
+                    <Label Grid.Row="3" Grid.Column="0" x:Name="lbl_Tel">Telefon:</Label>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="txt_Tel"></TextBox>
+                    <Label Grid.Row="4" Grid.Column="0" x:Name="lbl_Email">Email:</Label>
+                    <TextBox Grid.Row="4" Grid.Column="1" x:Name="txt_Email"></TextBox>
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Name="lbl_Vorname" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0">Vorname/n:</Label>
+                    <TextBox x:Name="txt_Vorname" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0"/>
+                    <Label Name="lbl_Nachname" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0,26,0,0">Nachname:</Label>
+                    <TextBox x:Name="txt_Nachname" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0,26,0,0"/>
+                    <Label Name="lbl_Kennung" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0,52,0,0">Mitarbeiterkennung:</Label>
+                    <TextBox x:Name="txt_Kennung" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0,52,0,0"/>
+                    <Label Name="lbl_Geb" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0,78,0,0">Geburtstag:</Label>
+                    <TextBox x:Name="txt_Geb" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0,78,0,0"/>
+                </Grid>
+            </StackPanel>
+            <Button x:Name="btn_confirm" Click="btn_confirm_Click" Grid.Column="1" Grid.Row="1" Height="26" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10,90,10">Bestätigen</Button>
+            <Button x:Name="btn_cancel" Click="btn_cancel_Click" Grid.Column="1" Grid.Row="1" Height="26" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">Abbrechen</Button>
+        </Grid>
+    </ContentControl>
+</UserControl>
