@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Grid.Row="0" Source="C:\Users\thhofmann\Downloads\nein-426204-1.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto"/>
+            <Image Grid.Column="0" Grid.Row="0" Source="C:\Users\thhofmann\Downloads\nein-426204-1.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto" Margin="10"/>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,20,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>

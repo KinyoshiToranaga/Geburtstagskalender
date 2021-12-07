@@ -16,7 +16,7 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#FF5AC1E2"></Border>
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#FF6FA8DC"></Border>
         <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" x:Name="txt_Titel" FontSize="36" FontWeight="Bold" Background="{x:Null}">Adressbuch</TextBox>
         <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="150" Margin="20" x:Name="txt_search" TextChanged="txt_search_TextChanged"></TextBox>
         <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Height="30">

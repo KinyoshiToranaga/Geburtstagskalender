@@ -29,5 +29,20 @@ namespace Geburtstagskalender
             CollOfPeople.Add(new Person(Kennung, Vorname, Nachname, Geburtstag, PLZ, Ort, TelNr, Email));
             this.SafePeople();
         }
+        
+        private void SortColl()
+        {
+            List<Person> people = new List<Person>();
+            foreach(Person person in CollOfPeople)
+            {
+                people.Add(person);
+            }
+            people.OrderBy(o => o.Geburtstag);
+            CollOfBDays.Clear();
+            foreach(Person person1 in people)
+            {
+                CollOfBDays.Add(person1);
+            }
+        }
     }
 }

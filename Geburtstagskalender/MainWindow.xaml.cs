@@ -38,6 +38,7 @@ namespace Geburtstagskalender
 
         private void btn_ShowGebList_Click(object sender, RoutedEventArgs e)
         {
+
             namelist.Change(true);
         }
 
