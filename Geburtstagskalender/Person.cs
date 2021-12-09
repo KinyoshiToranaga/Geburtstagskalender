@@ -44,6 +44,14 @@ namespace Geburtstagskalender
 #endregion Persönlich
 
 #region Adresse
+        private string strasse;
+
+        public string Strasse
+        {
+            get { return strasse; }
+            set { strasse = value; }
+        }
+
         private string plz;
 
         public string PLZ
@@ -78,13 +86,14 @@ namespace Geburtstagskalender
 #endregion Adresse
 
         //Konstruktor
-        public Person(string Kennung, string Vorname, string Nachname, DateTime Geburtstag, string PLZ, string Ort, string TelNr, string Email)
+        public Person(string Kennung, string Vorname, string Nachname, DateTime Geburtstag, string Strasse, string PLZ, string Ort, string TelNr, string Email)
         {
             this.Kennung = Kennung;
             this.Vorname = Vorname;
             this.Nachname = Nachname;
             this.Geburtstag = Geburtstag;
 
+            this.Strasse = Strasse;
             this.PLZ = PLZ;
             this.Ort = Ort;
             this.TelNr = TelNr;

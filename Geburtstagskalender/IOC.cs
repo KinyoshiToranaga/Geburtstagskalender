@@ -10,7 +10,6 @@ namespace Geburtstagskalender
     public class IOC
     {
         private DBC dbc = new DBC();
-        //List<Person> ListOfPeople = new List<Person>();
         public ObservableCollection<Person> CollOfPeople = new ObservableCollection<Person>();
         public ObservableCollection<Person> CollOfBDays = new ObservableCollection<Person>();
 
@@ -24,13 +23,64 @@ namespace Geburtstagskalender
             dbc.SafePeople(CollOfPeople);
         }
 
-        public void AddPeople(string Kennung, string Vorname, string Nachname, DateTime Geburtstag, string PLZ, string Ort, string TelNr, string Email)
+        public void AddPeople(string Kennung, string Vorname, string Nachname, DateTime Geburtstag, string Strasse, string PLZ, string Ort, string TelNr, string Email)
         {
-            CollOfPeople.Add(new Person(Kennung, Vorname, Nachname, Geburtstag, PLZ, Ort, TelNr, Email));
+            CollOfPeople.Add(new Person(Kennung, Vorname, Nachname, Geburtstag, Strasse, PLZ, Ort, TelNr, Email));
             this.SafePeople();
+            this.GetBDays();
         }
-        
-        private void SortColl()
+
+        public void GetBDays()
+        {
+            /*Person[] tmp = new Person[CollOfPeople.Count()];
+            CollOfPeople.CopyTo(tmp, 0);*/
+            Person[] tmp = new Person[CollOfPeople.Count()];
+            CollOfPeople.CopyTo(tmp, 0);
+            List<Person> tmp2 = tmp.ToList();
+            for (int i = 0; i < 5; i++)
+            {
+                CollOfBDays.Add(tmp2[0]);
+                for (int j = 0; j < tmp2.Count; j++)
+                {
+                    if (CollOfBDays[i].Geburtstag > tmp2[j].Geburtstag)
+                    {
+                        CollOfBDays[i] = tmp2[j];
+                    }
+                }
+                tmp2.Remove(CollOfBDays[i]);
+            }
+        }
+
+        public bool CheckEmail(string a)
+        {
+            string[] b, c;
+            try
+            {
+                b = a.Split('@');
+                c = b[1].Split('.');
+            }
+            catch
+            {
+                return false;
+            }
+            if (b.Length == 2 && c.Length == 2)
+            {
+                if (b[0] != "" && b[1] != "" && c[1] != "")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /*private void SortColl()
         {
             List<Person> people = new List<Person>();
             foreach(Person person in CollOfPeople)
@@ -43,6 +93,6 @@ namespace Geburtstagskalender
             {
                 CollOfBDays.Add(person1);
             }
-        }
+        }*/
     }
 }

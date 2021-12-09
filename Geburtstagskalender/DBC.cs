@@ -23,22 +23,22 @@ namespace Geburtstagskalender
         public ObservableCollection<Person> GetPeople()
         {
             ObservableCollection<Person> ListOfPeople = new ObservableCollection<Person>();
-            ListOfPeople.Clear();
+            //ListOfPeople.Clear();
             //reader = new StreamReader(filepath);
             if (File.Exists(filepath))
             {
                 reader = new StreamReader(filepath);
-                try
+                while (!reader.EndOfStream)
                 {
-                    while (!reader.EndOfStream)
+                    try
                     {
                         string[] tmp = reader.ReadLine().Split(';');
-                        ListOfPeople.Add(new Person(tmp[0], tmp[1], tmp[2], Convert.ToDateTime(tmp[3]), tmp[4], tmp[5], tmp[6], tmp[7]));
+                        ListOfPeople.Add(new Person(tmp[0], tmp[1], tmp[2], Convert.ToDateTime(tmp[3]), tmp[4], tmp[5], tmp[6], tmp[7], tmp[8]));
                     }
-                }
-                catch
-                {
-
+                    catch (Exception e)
+                    {
+                        var test = "";
+                    }
                 }
             }
             reader.Close();
@@ -51,7 +51,7 @@ namespace Geburtstagskalender
             {
                 foreach (Person p in people)
                 {
-                    writer.WriteLine(p.Kennung + ";" + p.Vorname + ";" + p.Nachname + ";" + p.Geburtstag + ";" + p.PLZ + ";" + p.Ort + ";" + p.TelNr + ";" + p.Email);
+                    writer.WriteLine(p.Kennung + ";" + p.Vorname + ";" + p.Nachname + ";" + p.Geburtstag + ";" + p.Strasse + ";" + p.PLZ + ";" + p.Ort + ";" + p.TelNr + ";" + p.Email);
                 }
             }
         }

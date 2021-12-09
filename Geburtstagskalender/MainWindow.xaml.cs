@@ -13,11 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+/*
+Member bearbeiten
+SuFu
+Kalender hinzufügen
+Email prüfen
+GUI anpassen für Datum
+*/
 namespace Geburtstagskalender
 {
-    /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         IOC ioc = new IOC();
@@ -28,7 +32,8 @@ namespace Geburtstagskalender
             InitializeComponent();
             namelist = new uc_namelist(ioc);
             uc_Left.Content = namelist;
-            this.ioc.GetPeople();
+            ioc.GetPeople();
+            ioc.GetBDays();
         }
 
         private void txt_search_TextChanged(object sender, TextChangedEventArgs e)
@@ -38,8 +43,27 @@ namespace Geburtstagskalender
 
         private void btn_ShowGebList_Click(object sender, RoutedEventArgs e)
         {
-
+            //Kalender hinzufügen
             namelist.Change(true);
+        }
+
+        private void btn_DelUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (!namelist.Bdays && namelist.LsV_MemberList.SelectedItems != null)
+            {
+                List<int> indexes = new List<int>();
+                System.Collections.IList tmp = namelist.LsV_MemberList.SelectedItems;
+                foreach (Person person in tmp)
+                {
+                    indexes.Add(ioc.CollOfPeople.IndexOf(person));
+                }
+                indexes.Sort();
+                for (int i = indexes.Count - 1; i >= 0; i--)
+                {
+                    ioc.CollOfPeople.RemoveAt(indexes[i]);
+                }
+            }
+            ioc.GetBDays();
         }
 
         private void btn_ShowUser_Click(object sender, RoutedEventArgs e)

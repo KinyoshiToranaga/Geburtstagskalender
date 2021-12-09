@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Row="0" Grid.Column="0" x:Name="btn_ShowGebList" Click="btn_ShowGebList_Click">Bdays</Button>
             <Button Grid.Row="0" Grid.Column="1" x:Name="btn_ShowUser" Click="btn_ShowUser_Click">User</Button>
-            <Button Grid.Row="0" Grid.Column="2" x:Name="btn_DelUser">Delete</Button>
+            <Button Grid.Row="0" Grid.Column="2" x:Name="btn_DelUser" Click="btn_DelUser_Click">Delete</Button>
             <Button Grid.Row="0" Grid.Column="3" x:Name="btn_AddUser" Click="btn_AddUser_Click">Add</Button>
         </Grid>
         <UserControl Name="uc_Left" Grid.Row="1" Grid.Column="0" Margin="0,30,0,0">

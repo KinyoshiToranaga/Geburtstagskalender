@@ -22,16 +22,34 @@ namespace Geburtstagskalender
     {
         IOC ioc;
 
+        private bool bdays;
+
+        public bool Bdays
+        {
+            get { return bdays; }
+        }
+
         public uc_namelist(IOC ioc)
         {
             InitializeComponent();
             this.ioc = ioc;
-            LstB_MemberList.ItemsSource = ioc.CollOfBDays;
+            //this.bdays = true;
+            //LsV_MemberList.ItemsSource = ioc.CollOfBDays;
+            this.Change(true);
         }
 
         public void Change(bool bdays)
         {
-            LstB_MemberList.ItemsSource = bdays ? ioc.CollOfBDays : ioc.CollOfPeople;
+            this.bdays = bdays;
+            //LsV_MemberList.ItemsSource = bdays ? ioc.CollOfBDays : ioc.CollOfPeople;
+            if (bdays)
+            {
+                LsV_MemberList.ItemsSource = ioc.CollOfBDays;
+            }
+            else
+            {
+                LsV_MemberList.ItemsSource = ioc.CollOfPeople;
+            }
         }
     }
 }

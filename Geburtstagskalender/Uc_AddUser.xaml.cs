@@ -30,7 +30,7 @@ namespace Geburtstagskalender
             {
                 txt_Email.IsEnabled = false;
                 txt_Geb.IsEnabled = false;
-                txt_Kennung.IsEnabled=false;
+                txt_Kennung.IsEnabled = false;
                 txt_Nachname.IsEnabled = false;
                 txt_Ort.IsEnabled = false;
                 txt_PLZ.IsEnabled = false;
@@ -42,13 +42,16 @@ namespace Geburtstagskalender
 
         private void btn_confirm_Click(object sender, RoutedEventArgs e)
         {
-            ioc.AddPeople(txt_Kennung.Text, txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text);
+            if (ioc.CheckEmail(txt_Email.Text))
+            {
+                ioc.AddPeople(txt_Kennung.Text, txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text);
+            }
             cc_AddUser.Content = null;
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
