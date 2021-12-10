@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Geburtstagskalender"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <ContentControl x:Name="cc_AddUser">
         <Grid>
@@ -17,6 +17,23 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Grid.Row="0" Source="C:\Users\thhofmann\Downloads\nein-426204-1.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto" Margin="10"/>
+
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Name="lbl_Vorname" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0">Vorname/n:</Label>
+                    <TextBox x:Name="txt_Vorname" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0"/>
+                    <Label Name="lbl_Nachname" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0,26,0,0">Nachname:</Label>
+                    <TextBox x:Name="txt_Nachname" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0,26,0,0"/>
+                    <Label Name="lbl_Kennung" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0,52,0,0">Mitarbeiterkennung:</Label>
+                    <TextBox x:Name="txt_Kennung" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0,52,0,0"/>
+                    <Label Name="lbl_Geb" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0,78,0,0">Geburtstag:</Label>
+                    <DatePicker x:Name="txt_Geb" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0,78,0,0"/>
+                </Grid>
+            </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,20,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -42,22 +59,9 @@
                     <TextBox Grid.Row="4" Grid.Column="1" x:Name="txt_Email"></TextBox>
                 </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label Name="lbl_Vorname" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0">Vorname/n:</Label>
-                    <TextBox x:Name="txt_Vorname" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0"/>
-                    <Label Name="lbl_Nachname" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0,26,0,0">Nachname:</Label>
-                    <TextBox x:Name="txt_Nachname" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0,26,0,0"/>
-                    <Label Name="lbl_Kennung" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0,52,0,0">Mitarbeiterkennung:</Label>
-                    <TextBox x:Name="txt_Kennung" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0,52,0,0"/>
-                    <Label Name="lbl_Geb" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="0,78,0,0">Geburtstag:</Label>
-                    <DatePicker x:Name="txt_Geb" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="214" Margin="0,78,0,0"/>
-                </Grid>
-            </StackPanel>
+            <Button x:Name="btn_edit" Click="btn_edit_Click" Background="Transparent" Grid.Column="1" Grid.Row="1" Height="80" Width="80" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
+                <Image Source="Schraubenschluessel.png"/>
+            </Button>
             <Button x:Name="btn_confirm" Click="btn_confirm_Click" Grid.Column="1" Grid.Row="1" Height="26" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10,90,10">Bestätigen</Button>
             <Button x:Name="btn_cancel" Click="btn_cancel_Click" Grid.Column="1" Grid.Row="1" Height="26" Width="70" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">Abbrechen</Button>
         </Grid>

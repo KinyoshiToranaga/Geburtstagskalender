@@ -21,6 +21,7 @@ namespace Geburtstagskalender
     public partial class uc_namelist : UserControl
     {
         IOC ioc;
+        Uc_AddUser AddUser;
 
         private bool bdays;
 
@@ -29,19 +30,17 @@ namespace Geburtstagskalender
             get { return bdays; }
         }
 
-        public uc_namelist(IOC ioc)
+        public uc_namelist(IOC ioc, Uc_AddUser addUser)
         {
             InitializeComponent();
             this.ioc = ioc;
-            //this.bdays = true;
-            //LsV_MemberList.ItemsSource = ioc.CollOfBDays;
+            this.AddUser = addUser;
             this.Change(true);
         }
 
         public void Change(bool bdays)
         {
             this.bdays = bdays;
-            //LsV_MemberList.ItemsSource = bdays ? ioc.CollOfBDays : ioc.CollOfPeople;
             if (bdays)
             {
                 LsV_MemberList.ItemsSource = ioc.CollOfBDays;
@@ -50,6 +49,18 @@ namespace Geburtstagskalender
             {
                 LsV_MemberList.ItemsSource = ioc.CollOfPeople;
             }
+        }
+
+        private void LsV_MemberList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var t = "";
+            Person person=(Person)LsV_MemberList.SelectedItems[0];
+            AddUser.LoadUser(person);
+        }
+
+        private void LsV_MemberList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -13,12 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-/*
+/*                                                                                IN ARBEIT IN UC_ADDUSER.XAML.CS
 Member bearbeiten
-SuFu
 Kalender hinzufügen
-Email prüfen
-GUI anpassen für Datum
+Bilder speichern
+SuFu
 */
 namespace Geburtstagskalender
 {
@@ -26,19 +25,22 @@ namespace Geburtstagskalender
     {
         IOC ioc = new IOC();
         uc_namelist namelist;
+        Uc_AddUser addUser;
 
         public MainWindow()
         {
             InitializeComponent();
-            namelist = new uc_namelist(ioc);
+            addUser = new Uc_AddUser(ioc, 1);
+            namelist = new uc_namelist(ioc, addUser);
             uc_Left.Content = namelist;
+            uc_Right.Content = addUser;
             ioc.GetPeople();
             ioc.GetBDays();
         }
 
         private void txt_search_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            ioc.Search(txt_search.Text);
         }
 
         private void btn_ShowGebList_Click(object sender, RoutedEventArgs e)
@@ -63,20 +65,19 @@ namespace Geburtstagskalender
                     ioc.CollOfPeople.RemoveAt(indexes[i]);
                 }
             }
+            ioc.CollOfBDays.Clear();
             ioc.GetBDays();
         }
 
         private void btn_ShowUser_Click(object sender, RoutedEventArgs e)
         {
-            Uc_AddUser uc_addUser = new Uc_AddUser(ioc, false);
-            uc_Right.Content = uc_addUser;
+            addUser.SwitchMode(1);
             namelist.Change(false);
         }
 
         private void btn_AddUser_Click(object sender, RoutedEventArgs e)
         {
-            Uc_AddUser uc_addUser = new Uc_AddUser(ioc, true);
-            uc_Right.Content = uc_addUser;
+            addUser.SwitchMode(0);
             namelist.Change(false);
         }
 

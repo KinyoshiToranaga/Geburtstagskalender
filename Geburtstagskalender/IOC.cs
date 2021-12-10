@@ -32,13 +32,15 @@ namespace Geburtstagskalender
 
         public void GetBDays()
         {
-            /*Person[] tmp = new Person[CollOfPeople.Count()];
-            CollOfPeople.CopyTo(tmp, 0);*/
             Person[] tmp = new Person[CollOfPeople.Count()];
             CollOfPeople.CopyTo(tmp, 0);
             List<Person> tmp2 = tmp.ToList();
             for (int i = 0; i < 5; i++)
             {
+                if (tmp2.Count == 0)
+                {
+                    break;
+                }
                 CollOfBDays.Add(tmp2[0]);
                 for (int j = 0; j < tmp2.Count; j++)
                 {
@@ -80,19 +82,9 @@ namespace Geburtstagskalender
             }
         }
 
-        /*private void SortColl()
+        public void Search(string searchTxt)
         {
-            List<Person> people = new List<Person>();
-            foreach(Person person in CollOfPeople)
-            {
-                people.Add(person);
-            }
-            people.OrderBy(o => o.Geburtstag);
-            CollOfBDays.Clear();
-            foreach(Person person1 in people)
-            {
-                CollOfBDays.Add(person1);
-            }
-        }*/
+
+        }
     }
 }
