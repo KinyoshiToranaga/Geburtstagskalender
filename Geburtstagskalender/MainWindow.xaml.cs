@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-/*                                                                                IN ARBEIT IN UC_ADDUSER.XAML.CS
-Kalender hinzufügen
+/*
 SuFu
+Geburtstagsliste fixen
 */
 namespace Geburtstagskalender
 {
@@ -24,14 +24,16 @@ namespace Geburtstagskalender
         IOC ioc = new IOC();
         uc_namelist namelist;
         Uc_AddUser addUser;
+        Uc_Kalender kalender;
 
         public MainWindow()
         {
             InitializeComponent();
-            addUser = new Uc_AddUser(ioc, namelist, 1);
+            addUser = new Uc_AddUser(ioc, 1);
             namelist = new uc_namelist(ioc, addUser);
+            kalender = new Uc_Kalender();
             uc_Left.Content = namelist;
-            uc_Right.Content = addUser;
+            uc_Right.Content = kalender;
             ioc.GetPeople();
             ioc.GetBDays();
         }
@@ -43,7 +45,12 @@ namespace Geburtstagskalender
 
         private void btn_ShowGebList_Click(object sender, RoutedEventArgs e)
         {
-            //Kalender hinzufügen
+            uc_Right.Content = kalender;
+            kalender.cal_Kalender.SelectedDates.Clear();
+            foreach (Person person in ioc.CollOfPeople)
+            {
+                kalender.cal_Kalender.SelectedDates.Add(person.Geburtstag);
+            }
             namelist.Change(true);
         }
 
@@ -69,12 +76,14 @@ namespace Geburtstagskalender
 
         private void btn_ShowUser_Click(object sender, RoutedEventArgs e)
         {
+            uc_Right.Content = addUser;
             addUser.SwitchMode(1);
             namelist.Change(false);
         }
 
         private void btn_AddUser_Click(object sender, RoutedEventArgs e)
         {
+            uc_Right.Content = addUser;
             addUser.SwitchMode(0);
             namelist.Change(false);
         }

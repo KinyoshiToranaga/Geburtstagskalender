@@ -58,8 +58,11 @@
     <Compile Include="Uc_AddUser.xaml.cs">
       <DependentUpon>Uc_AddUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uc_namelist.xaml.cs">
-      <DependentUpon>uc_namelist.xaml</DependentUpon>
+    <Compile Include="Uc_Kalender.xaml.cs">
+      <DependentUpon>Uc_Kalender.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Uc_Namelist.xaml.cs">
+      <DependentUpon>Uc_Namelist.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -79,7 +82,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uc_namelist.xaml">
+    <Page Include="Uc_Kalender.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Uc_Namelist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

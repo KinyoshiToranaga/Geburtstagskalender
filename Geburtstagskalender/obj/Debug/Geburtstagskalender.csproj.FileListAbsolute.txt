@@ -17,3 +17,5 @@ C:\Users\thhofmann\source\repos\Geburtstagskalender\Geburtstagskalender\obj\Debu
 C:\Users\thhofmann\source\repos\Geburtstagskalender\Geburtstagskalender\obj\Debug\uc_namelist.g.cs
 C:\Users\thhofmann\source\repos\Geburtstagskalender\Geburtstagskalender\obj\Debug\uc_AddUser.baml
 C:\Users\thhofmann\source\repos\Geburtstagskalender\Geburtstagskalender\obj\Debug\uc_namelist.baml
+C:\Users\thhofmann\source\repos\Geburtstagskalender\Geburtstagskalender\obj\Debug\Uc_Kalender.g.cs
+C:\Users\thhofmann\source\repos\Geburtstagskalender\Geburtstagskalender\obj\Debug\Uc_Kalender.baml

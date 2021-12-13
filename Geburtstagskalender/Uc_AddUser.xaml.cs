@@ -18,15 +18,13 @@ namespace Geburtstagskalender
 {
     public partial class Uc_AddUser : UserControl
     {
-        IOC ioc;
-        uc_namelist namelist;
+        private IOC ioc;
         private int mode;
 
-        public Uc_AddUser(IOC ioc, uc_namelist namelist, int mode)
+        public Uc_AddUser(IOC ioc, int mode)
         {
             InitializeComponent();
             this.ioc = ioc;
-            this.namelist = namelist;
             SwitchMode(1);
         }
 
@@ -34,7 +32,7 @@ namespace Geburtstagskalender
         {
             if (mode != 0)
             {
-                if (person.ImgFilePath!=null)
+                if (person.ImgFilePath != null)
                 {
                     img_profile.Source = new BitmapImage(new Uri(person.ImgFilePath));
                 }
@@ -184,7 +182,7 @@ namespace Geburtstagskalender
                                                     switch (mode)
                                                     {
                                                         case 0:
-                                                            if (((BitmapImage)img_profile.Source).UriSource == null)
+                                                            if ((BitmapImage)img_profile.Source == null)
                                                             {
                                                                 ioc.AddPeople(txt_Kennung.Text, txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text);
                                                             }
@@ -193,7 +191,8 @@ namespace Geburtstagskalender
                                                                 ioc.AddPeople(txt_Kennung.Text, ((BitmapImage)img_profile.Source).UriSource.ToString(), txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text);
                                                             }
                                                             break;
-                                                        case 2: if(((BitmapImage)img_profile.Source).UriSource == null)
+                                                        case 2:
+                                                            if ((BitmapImage)img_profile.Source == null)
                                                             {
                                                                 ioc.ChangePeople(txt_Kennung.Text, txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text); break;
                                                             }
