@@ -9,7 +9,7 @@ namespace Geburtstagskalender
     public class Person
     {
         //Attribute
-#region Personlich
+        #region Personlich
         private string kennung;
 
         public string Kennung
@@ -17,6 +17,15 @@ namespace Geburtstagskalender
             get { return kennung; }
             set { kennung = value; }
         }
+
+        private string imgFilePath;
+
+        public string ImgFilePath
+        {
+            get { return imgFilePath; }
+            set { imgFilePath = value; }
+        }
+
 
         private string vorname;
 
@@ -41,9 +50,9 @@ namespace Geburtstagskalender
             get { return geburtstag; }
             set { geburtstag = value; }
         }
-#endregion Persönlich
+        #endregion Persönlich
 
-#region Adresse
+        #region Adresse
         private string strasse;
 
         public string Strasse
@@ -83,9 +92,23 @@ namespace Geburtstagskalender
             get { return email; }
             set { email = value; }
         }
-#endregion Adresse
+        #endregion Adresse
 
-        //Konstruktor
+        //Konstruktoren
+        public Person(string Kennung, string ImgFilePath, string Vorname, string Nachname, DateTime Geburtstag, string Strasse, string PLZ, string Ort, string TelNr, string Email)
+        {
+            this.Kennung = Kennung;
+            this.ImgFilePath = ImgFilePath;
+            this.Vorname = Vorname;
+            this.Nachname = Nachname;
+            this.Geburtstag = Geburtstag;
+
+            this.Strasse = Strasse;
+            this.PLZ = PLZ;
+            this.Ort = Ort;
+            this.TelNr = TelNr;
+            this.Email = Email;
+        }
         public Person(string Kennung, string Vorname, string Nachname, DateTime Geburtstag, string Strasse, string PLZ, string Ort, string TelNr, string Email)
         {
             this.Kennung = Kennung;

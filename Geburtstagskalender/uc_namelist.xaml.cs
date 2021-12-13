@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Geburtstagskalender
 {
-    /// <summary>
-    /// Interaktionslogik für uc_namelist.xaml
-    /// </summary>
     public partial class uc_namelist : UserControl
     {
         IOC ioc;
@@ -53,14 +50,15 @@ namespace Geburtstagskalender
 
         private void LsV_MemberList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var t = "";
-            Person person=(Person)LsV_MemberList.SelectedItems[0];
-            AddUser.LoadUser(person);
-        }
-
-        private void LsV_MemberList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
+            if (LsV_MemberList.SelectedItems.Count != 0)
+            {
+                Person person = (Person)LsV_MemberList.SelectedItems[0];
+                AddUser.LoadUser(person);
+            }
+            else
+            {
+                AddUser.ClearUser();
+            }
         }
     }
 }

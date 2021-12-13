@@ -23,9 +23,62 @@ namespace Geburtstagskalender
             dbc.SafePeople(CollOfPeople);
         }
 
+        public void AddPeople(string Kennung, string ImgFilePath, string Vorname, string Nachname, DateTime Geburtstag, string Strasse, string PLZ, string Ort, string TelNr, string Email)
+        {
+            CollOfPeople.Add(new Person(Kennung, ImgFilePath, Vorname, Nachname, Geburtstag, Strasse, PLZ, Ort, TelNr, Email));
+            this.SafePeople();
+            this.GetBDays();
+        }
         public void AddPeople(string Kennung, string Vorname, string Nachname, DateTime Geburtstag, string Strasse, string PLZ, string Ort, string TelNr, string Email)
         {
             CollOfPeople.Add(new Person(Kennung, Vorname, Nachname, Geburtstag, Strasse, PLZ, Ort, TelNr, Email));
+            this.SafePeople();
+            this.GetBDays();
+        }
+
+        public void ChangePeople(string Kennung, string Vorname, string Nachname, DateTime Geburtstag, string Strasse, string PLZ, string Ort, string TelNr, string Email)
+        {
+            foreach (Person person in CollOfPeople)
+            {
+                if (person.Kennung == Kennung)
+                {
+                    person.Kennung = Kennung;
+                    person.Vorname = Vorname;
+                    person.Nachname = Nachname;
+                    person.Geburtstag = Geburtstag;
+
+                    person.Strasse = Strasse;
+                    person.PLZ = PLZ;
+                    person.Ort = Ort;
+                    person.TelNr = TelNr;
+                    person.Email = Email;
+                    break;
+                }
+            }
+            this.SafePeople();
+            this.GetBDays();
+        }
+
+        public void ChangePeople(string Kennung, string ImgFilePath, string Vorname, string Nachname, DateTime Geburtstag, string Strasse, string PLZ, string Ort, string TelNr, string Email)
+        {
+            foreach (Person person in CollOfPeople)
+            {
+                if (person.Kennung == Kennung)
+                {
+                    person.Kennung = Kennung;
+                    person.ImgFilePath = ImgFilePath;
+                    person.Vorname = Vorname;
+                    person.Nachname = Nachname;
+                    person.Geburtstag = Geburtstag;
+
+                    person.Strasse = Strasse;
+                    person.PLZ = PLZ;
+                    person.Ort = Ort;
+                    person.TelNr = TelNr;
+                    person.Email = Email;
+                    break;
+                }
+            }
             this.SafePeople();
             this.GetBDays();
         }
@@ -35,6 +88,7 @@ namespace Geburtstagskalender
             Person[] tmp = new Person[CollOfPeople.Count()];
             CollOfPeople.CopyTo(tmp, 0);
             List<Person> tmp2 = tmp.ToList();
+            CollOfBDays.Clear();
             for (int i = 0; i < 5; i++)
             {
                 if (tmp2.Count == 0)

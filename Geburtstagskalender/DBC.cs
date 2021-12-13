@@ -27,7 +27,15 @@ namespace Geburtstagskalender
                     try
                     {
                         string[] tmp = reader.ReadLine().Split(';');
-                        ListOfPeople.Add(new Person(tmp[0], tmp[1], tmp[2], Convert.ToDateTime(tmp[3]), tmp[4], tmp[5], tmp[6], tmp[7], tmp[8]));
+                        if (tmp.Length < 10)
+                        {
+                            ListOfPeople.Add(new Person(tmp[0], tmp[1], tmp[2], Convert.ToDateTime(tmp[3]), tmp[4], tmp[5], tmp[6], tmp[7], tmp[8]));
+                        }
+                        else
+                        {
+                            ListOfPeople.Add(new Person(tmp[0], tmp[1], tmp[2], tmp[3], Convert.ToDateTime(tmp[4]), tmp[5], tmp[6], tmp[7], tmp[8], tmp[9]));
+                        }
+
                     }
                     catch
                     {
@@ -44,7 +52,14 @@ namespace Geburtstagskalender
             {
                 foreach (Person p in people)
                 {
-                    writer.WriteLine(p.Kennung + ";" + p.Vorname + ";" + p.Nachname + ";" + p.Geburtstag + ";" + p.Strasse + ";" + p.PLZ + ";" + p.Ort + ";" + p.TelNr + ";" + p.Email);
+                    if (p.ImgFilePath == null)
+                    {
+                        writer.WriteLine(p.Kennung + ";" + p.Vorname + ";" + p.Nachname + ";" + p.Geburtstag + ";" + p.Strasse + ";" + p.PLZ + ";" + p.Ort + ";" + p.TelNr + ";" + p.Email);
+                    }
+                    else
+                    {
+                        writer.WriteLine(p.Kennung + ";" + p.ImgFilePath + ";" + p.Vorname + ";" + p.Nachname + ";" + p.Geburtstag + ";" + p.Strasse + ";" + p.PLZ + ";" + p.Ort + ";" + p.TelNr + ";" + p.Email);
+                    }
                 }
             }
         }

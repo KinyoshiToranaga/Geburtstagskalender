@@ -16,7 +16,11 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Grid.Row="0" Source="C:\Users\thhofmann\Downloads\nein-426204-1.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto" Margin="10"/>
+            <Viewbox Grid.Column="0" Grid.Row="0" Margin="10" Stretch="Uniform">
+                <Button x:Name="btn_Image" Click="btn_Image_Click" Width="200" Height="200" Background="AliceBlue">
+                    <Image x:Name="img_profile" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+            </Viewbox>
 
             <StackPanel Grid.Row="0" Grid.Column="1">
                 <Grid>

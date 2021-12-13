@@ -14,9 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 /*                                                                                IN ARBEIT IN UC_ADDUSER.XAML.CS
-Member bearbeiten
 Kalender hinzufügen
-Bilder speichern
 SuFu
 */
 namespace Geburtstagskalender
@@ -30,7 +28,7 @@ namespace Geburtstagskalender
         public MainWindow()
         {
             InitializeComponent();
-            addUser = new Uc_AddUser(ioc, 1);
+            addUser = new Uc_AddUser(ioc, namelist, 1);
             namelist = new uc_namelist(ioc, addUser);
             uc_Left.Content = namelist;
             uc_Right.Content = addUser;
