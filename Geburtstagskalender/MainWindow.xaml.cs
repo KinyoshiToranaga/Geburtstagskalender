@@ -14,15 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 /*
-SuFu
-Geburtstagsliste fixen
+Geburtstagsliste nach KOMMENDEN Geburtstagen sortieren statt nach Geburtsdatum
 */
 namespace Geburtstagskalender
 {
     public partial class MainWindow : Window
     {
         IOC ioc = new IOC();
-        uc_namelist namelist;
+        Uc_namelist namelist;
         Uc_AddUser addUser;
         Uc_Kalender kalender;
 
@@ -30,7 +29,7 @@ namespace Geburtstagskalender
         {
             InitializeComponent();
             addUser = new Uc_AddUser(ioc, 1);
-            namelist = new uc_namelist(ioc, addUser);
+            namelist = new Uc_namelist(ioc, addUser);
             kalender = new Uc_Kalender();
             uc_Left.Content = namelist;
             uc_Right.Content = kalender;
@@ -40,7 +39,14 @@ namespace Geburtstagskalender
 
         private void txt_search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ioc.Search(txt_search.Text);
+            if (!string.IsNullOrWhiteSpace(txt_search.Text))
+            {
+                namelist.Change(2, txt_search.Text);
+            }
+            else
+            {
+                namelist.Change(0, "");
+            }
         }
 
         private void btn_ShowGebList_Click(object sender, RoutedEventArgs e)
@@ -51,12 +57,12 @@ namespace Geburtstagskalender
             {
                 kalender.cal_Kalender.SelectedDates.Add(person.Geburtstag);
             }
-            namelist.Change(true);
+            namelist.Change(1, "");
         }
 
         private void btn_DelUser_Click(object sender, RoutedEventArgs e)
         {
-            if (!namelist.Bdays && namelist.LsV_MemberList.SelectedItems != null)
+            if (namelist.Mode == 0 && namelist.LsV_MemberList.SelectedItems != null)
             {
                 List<int> indexes = new List<int>();
                 System.Collections.IList tmp = namelist.LsV_MemberList.SelectedItems;
@@ -78,14 +84,14 @@ namespace Geburtstagskalender
         {
             uc_Right.Content = addUser;
             addUser.SwitchMode(1);
-            namelist.Change(false);
+            namelist.Change(0, "");
         }
 
         private void btn_AddUser_Click(object sender, RoutedEventArgs e)
         {
             uc_Right.Content = addUser;
             addUser.SwitchMode(0);
-            namelist.Change(false);
+            namelist.Change(0, "");
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

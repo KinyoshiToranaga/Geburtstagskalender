@@ -15,36 +15,35 @@ using System.Windows.Shapes;
 
 namespace Geburtstagskalender
 {
-    public partial class uc_namelist : UserControl
+    public partial class Uc_namelist : UserControl
     {
         IOC ioc;
         Uc_AddUser AddUser;
 
-        private bool bdays;
+        private int mode;
 
-        public bool Bdays
+        public int Mode
         {
-            get { return bdays; }
+            get { return mode; }
+            set { mode = value; }
         }
 
-        public uc_namelist(IOC ioc, Uc_AddUser addUser)
+        public Uc_namelist(IOC ioc, Uc_AddUser addUser)
         {
             InitializeComponent();
             this.ioc = ioc;
             this.AddUser = addUser;
-            this.Change(true);
+            this.Change(1, "");
         }
 
-        public void Change(bool bdays)
+        public void Change(int mode, string searchString)
         {
-            this.bdays = bdays;
-            if (bdays)
+            this.Mode = mode;
+            switch (mode)
             {
-                LsV_MemberList.ItemsSource = ioc.CollOfBDays;
-            }
-            else
-            {
-                LsV_MemberList.ItemsSource = ioc.CollOfPeople;
+                case 0: LsV_MemberList.ItemsSource = ioc.CollOfPeople; break;
+                case 1: LsV_MemberList.ItemsSource = ioc.CollOfBDays; break;
+                case 2: LsV_MemberList.ItemsSource = ioc.SearchPeople(searchString); break;
             }
         }
 

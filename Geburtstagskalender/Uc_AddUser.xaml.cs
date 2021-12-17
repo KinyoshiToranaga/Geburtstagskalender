@@ -41,7 +41,7 @@ namespace Geburtstagskalender
                     img_profile.Source = null;
                 }
                 txt_Kennung.Text = person.Kennung;
-                txt_Vorname.Text = person.Kennung;
+                txt_Vorname.Text = person.Vorname;
                 txt_Nachname.Text = person.Nachname;
                 txt_Geb.Text = person.Geburtstag.ToString();
                 txt_Strasse.Text = person.Strasse;

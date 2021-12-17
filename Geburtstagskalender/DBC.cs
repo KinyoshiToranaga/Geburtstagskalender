@@ -35,7 +35,6 @@ namespace Geburtstagskalender
                         {
                             ListOfPeople.Add(new Person(tmp[0], tmp[1], tmp[2], tmp[3], Convert.ToDateTime(tmp[4]), tmp[5], tmp[6], tmp[7], tmp[8], tmp[9]));
                         }
-
                     }
                     catch
                     {
@@ -54,11 +53,29 @@ namespace Geburtstagskalender
                 {
                     if (p.ImgFilePath == null)
                     {
-                        writer.WriteLine(p.Kennung + ";" + p.Vorname + ";" + p.Nachname + ";" + p.Geburtstag + ";" + p.Strasse + ";" + p.PLZ + ";" + p.Ort + ";" + p.TelNr + ";" + p.Email);
+                        writer.WriteLine(p.Kennung + ";" +
+                            p.Vorname + ";" +
+                            p.Nachname + ";" +
+                            p.Geburtstag + ";" +
+                            p.Strasse + ";" +
+                            p.PLZ + ";" +
+                            p.Ort + ";" +
+                            p.TelNr + ";" +
+                            p.Email);
                     }
                     else
                     {
-                        writer.WriteLine(p.Kennung + ";" + p.ImgFilePath + ";" + p.Vorname + ";" + p.Nachname + ";" + p.Geburtstag + ";" + p.Strasse + ";" + p.PLZ + ";" + p.Ort + ";" + p.TelNr + ";" + p.Email);
+                        writer.WriteLine(p.Kennung + ";" +
+                            p.ImgFilePath + ";" +
+                            p.Vorname + ";" +
+                            p.Nachname + ";" +
+                            p.Geburtstag + ";" +
+                            p.Strasse + ";" +
+                            p.PLZ + ";" +
+                            p.Ort + ";" +
+                            p.TelNr + ";" +
+                            p.Email,
+                            Encoding.Default);
                     }
                 }
             }

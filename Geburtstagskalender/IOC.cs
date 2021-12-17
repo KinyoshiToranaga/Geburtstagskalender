@@ -13,6 +13,26 @@ namespace Geburtstagskalender
         public ObservableCollection<Person> CollOfPeople = new ObservableCollection<Person>();
         public ObservableCollection<Person> CollOfBDays = new ObservableCollection<Person>();
 
+        public List<Person> SearchPeople(string searchTxt)
+        {
+            List<Person> people = new List<Person>();
+            foreach (Person person in CollOfPeople)
+            {
+                if (person.Vorname.ToLower().Contains(searchTxt.ToLower()) ||
+                    person.Nachname.ToLower().Contains(searchTxt.ToLower()) ||
+                    person.Kennung.ToLower().Contains(searchTxt.ToLower()) ||
+                    person.Strasse.ToLower().Contains(searchTxt.ToLower()) ||
+                    person.PLZ.ToLower().Contains(searchTxt.ToLower()) ||
+                    person.Ort.ToLower().Contains(searchTxt.ToLower()) ||
+                    person.TelNr.ToLower().Contains(searchTxt.ToLower()) ||
+                    person.Email.ToLower().Contains(searchTxt.ToLower()))
+                {
+                    people.Add(person);
+                }
+            }
+            return people;
+        }
+
         public void GetPeople()
         {
             CollOfPeople = dbc.GetPeople();
@@ -58,7 +78,6 @@ namespace Geburtstagskalender
             this.SafePeople();
             this.GetBDays();
         }
-
         public void ChangePeople(string Kennung, string ImgFilePath, string Vorname, string Nachname, DateTime Geburtstag, string Strasse, string PLZ, string Ort, string TelNr, string Email)
         {
             foreach (Person person in CollOfPeople)
@@ -134,11 +153,6 @@ namespace Geburtstagskalender
             {
                 return false;
             }
-        }
-
-        public void Search(string searchTxt)
-        {
-
         }
     }
 }
