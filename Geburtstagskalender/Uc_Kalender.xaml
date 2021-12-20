@@ -7,8 +7,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Viewbox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Viewbox Grid.Row="0" Grid.ColumnSpan="2">
             <Calendar x:Name="cal_Kalender" SelectionMode="MultipleRange"/>
         </Viewbox>
+        <Image x:Name="img_BDayToday" Source="/Torte.png" Grid.Column="0" Grid.Row="1" Margin="10"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0">
+            <TextBox x:Name="txt_BDayKid" IsEnabled="False"/>
+        </StackPanel>
     </Grid>
 </UserControl>

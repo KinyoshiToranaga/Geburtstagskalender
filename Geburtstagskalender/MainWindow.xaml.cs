@@ -14,7 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 /*
-Geburtstagsliste nach KOMMENDEN Geburtstagen sortieren statt nach Geburtsdatum
+PopUps erstellen
+selected dates ersetzen
 */
 namespace Geburtstagskalender
 {
@@ -35,6 +36,7 @@ namespace Geburtstagskalender
             uc_Right.Content = kalender;
             ioc.GetPeople();
             ioc.GetBDays();
+            kalender.ChangeVis(ioc.GetBDayToday());
         }
 
         private void txt_search_TextChanged(object sender, TextChangedEventArgs e)
@@ -58,26 +60,32 @@ namespace Geburtstagskalender
                 kalender.cal_Kalender.SelectedDates.Add(person.Geburtstag);
             }
             namelist.Change(1, "");
+            kalender.ChangeVis(ioc.GetBDayToday());
         }
 
         private void btn_DelUser_Click(object sender, RoutedEventArgs e)
         {
             if (namelist.Mode == 0 && namelist.LsV_MemberList.SelectedItems != null)
             {
-                List<int> indexes = new List<int>();
-                System.Collections.IList tmp = namelist.LsV_MemberList.SelectedItems;
-                foreach (Person person in tmp)
+                if (MessageBox.Show("Diese/n Nutzer unwiderruflich löschen?", "Nutzer löschen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    indexes.Add(ioc.CollOfPeople.IndexOf(person));
-                }
-                indexes.Sort();
-                for (int i = indexes.Count - 1; i >= 0; i--)
-                {
-                    ioc.CollOfPeople.RemoveAt(indexes[i]);
+                    List<int> indexes = new List<int>();
+                    System.Collections.IList tmp = namelist.LsV_MemberList.SelectedItems;
+                    foreach (Person person in tmp)
+                    {
+                        indexes.Add(ioc.CollOfPeople.IndexOf(person));
+                    }
+                    indexes.Sort();
+                    for (int i = indexes.Count - 1; i >= 0; i--)
+                    {
+                        ioc.CollOfPeople.RemoveAt(indexes[i]);
+                    }
+                    ioc.CollOfBDays.Clear();
+                    ioc.GetBDays();
+                    MessageBox.Show("Der/Die Nutzer wurden gelöscht", "Nutzer gelöscht", MessageBoxButton.OK);
+                    kalender.ChangeVis(ioc.GetBDayToday());
                 }
             }
-            ioc.CollOfBDays.Clear();
-            ioc.GetBDays();
         }
 
         private void btn_ShowUser_Click(object sender, RoutedEventArgs e)

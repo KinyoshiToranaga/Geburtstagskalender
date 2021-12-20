@@ -13,6 +13,19 @@ namespace Geburtstagskalender
         public ObservableCollection<Person> CollOfPeople = new ObservableCollection<Person>();
         public ObservableCollection<Person> CollOfBDays = new ObservableCollection<Person>();
 
+        public Person GetBDayToday()
+        {
+            Person person1=null;
+            foreach(Person person in CollOfPeople)
+            {
+                if(person.Geburtstag.DayOfYear == DateTime.Today.DayOfYear)
+                {
+                    person1 = person;
+                }
+            }
+            return person1;
+        }
+
         public List<Person> SearchPeople(string searchTxt)
         {
             List<Person> people = new List<Person>();
@@ -107,22 +120,21 @@ namespace Geburtstagskalender
             Person[] tmp = new Person[CollOfPeople.Count()];
             CollOfPeople.CopyTo(tmp, 0);
             List<Person> tmp2 = tmp.ToList();
+            List<Person> tmp3 = tmp2.OrderBy(a => a.Geburtstag.DayOfYear).ToList();
             CollOfBDays.Clear();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0;i < tmp3.Count();i++)
             {
-                if (tmp2.Count == 0)
+                if (tmp3[i].Geburtstag.DayOfYear > DateTime.Today.DayOfYear)
                 {
-                    break;
+                    CollOfBDays.Add(tmp3[i]);
                 }
-                CollOfBDays.Add(tmp2[0]);
-                for (int j = 0; j < tmp2.Count; j++)
+            }
+            if (CollOfBDays.Count() < 5)
+            {
+                for (int i = 0; CollOfBDays.Count() < 5; i++)
                 {
-                    if (CollOfBDays[i].Geburtstag > tmp2[j].Geburtstag)
-                    {
-                        CollOfBDays[i] = tmp2[j];
-                    }
+                    CollOfBDays.Add(tmp[i]);
                 }
-                tmp2.Remove(CollOfBDays[i]);
             }
         }
 

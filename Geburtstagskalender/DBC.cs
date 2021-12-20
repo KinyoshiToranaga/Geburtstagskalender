@@ -61,7 +61,8 @@ namespace Geburtstagskalender
                             p.PLZ + ";" +
                             p.Ort + ";" +
                             p.TelNr + ";" +
-                            p.Email);
+                            p.Email,
+                            Encoding.Default);
                     }
                     else
                     {

@@ -22,5 +22,20 @@ namespace Geburtstagskalender
         {
             InitializeComponent();
         }
+
+        public void ChangeVis(Person person)
+        {
+            if (person != null ? true : false)
+            {
+                txt_BDayKid.Text = person.Vorname + " " + person.Nachname;
+                txt_BDayKid.Visibility = Visibility.Visible;
+                img_BDayToday.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                txt_BDayKid.Visibility = Visibility.Hidden;
+                img_BDayToday.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
