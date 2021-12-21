@@ -18,22 +18,26 @@ namespace Geburtstagskalender
 {
     public partial class Uc_Kalender : UserControl
     {
+        private List<Person> BDayKids;
+
         public Uc_Kalender()
         {
             InitializeComponent();
+            LsV_BDayKids.ItemsSource = BDayKids;
         }
 
-        public void ChangeVis(Person person)
+        public void ChangeVis(List<Person> persons)
         {
-            if (person != null ? true : false)
+            if (persons.Count != 0 ? true : false)
             {
-                txt_BDayKid.Text = person.Vorname + " " + person.Nachname;
-                txt_BDayKid.Visibility = Visibility.Visible;
+                BDayKids = null;
+                BDayKids = persons;
+                LsV_BDayKids.Visibility = Visibility.Visible;
                 img_BDayToday.Visibility = Visibility.Visible;
             }
             else
             {
-                txt_BDayKid.Visibility = Visibility.Hidden;
+                LsV_BDayKids.Visibility = Visibility.Hidden;
                 img_BDayToday.Visibility = Visibility.Hidden;
             }
         }

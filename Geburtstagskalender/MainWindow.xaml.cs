@@ -14,8 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 /*
-PopUps erstellen
 selected dates ersetzen
+Coloumnwidth anpassen
+Colorbinding fixen
 */
 namespace Geburtstagskalender
 {
@@ -65,7 +66,7 @@ namespace Geburtstagskalender
 
         private void btn_DelUser_Click(object sender, RoutedEventArgs e)
         {
-            if (namelist.Mode == 0 && namelist.LsV_MemberList.SelectedItems != null)
+            if (namelist.Mode == 0 && namelist.LsV_MemberList.SelectedItems.Count > 0)
             {
                 if (MessageBox.Show("Diese/n Nutzer unwiderruflich löschen?", "Nutzer löschen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {

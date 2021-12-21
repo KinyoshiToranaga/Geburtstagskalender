@@ -40,43 +40,46 @@ namespace Geburtstagskalender
                     {
                     }
                 }
+                reader.Close();
             }
-            reader.Close();
             return ListOfPeople;
         }
 
         public void SafePeople(ObservableCollection<Person> people)
         {
-            using (writer = new StreamWriter(filepath))
+            if (File.Exists(filepath))
             {
-                foreach (Person p in people)
+                using (writer = new StreamWriter(filepath))
                 {
-                    if (p.ImgFilePath == null)
+                    foreach (Person p in people)
                     {
-                        writer.WriteLine(p.Kennung + ";" +
-                            p.Vorname + ";" +
-                            p.Nachname + ";" +
-                            p.Geburtstag + ";" +
-                            p.Strasse + ";" +
-                            p.PLZ + ";" +
-                            p.Ort + ";" +
-                            p.TelNr + ";" +
-                            p.Email,
-                            Encoding.Default);
-                    }
-                    else
-                    {
-                        writer.WriteLine(p.Kennung + ";" +
-                            p.ImgFilePath + ";" +
-                            p.Vorname + ";" +
-                            p.Nachname + ";" +
-                            p.Geburtstag + ";" +
-                            p.Strasse + ";" +
-                            p.PLZ + ";" +
-                            p.Ort + ";" +
-                            p.TelNr + ";" +
-                            p.Email,
-                            Encoding.Default);
+                        if (p.ImgFilePath == null)
+                        {
+                            writer.WriteLine(p.Kennung + ";" +
+                                p.Vorname + ";" +
+                                p.Nachname + ";" +
+                                p.Geburtstag + ";" +
+                                p.Strasse + ";" +
+                                p.PLZ + ";" +
+                                p.Ort + ";" +
+                                p.TelNr + ";" +
+                                p.Email,
+                                Encoding.Default);
+                        }
+                        else
+                        {
+                            writer.WriteLine(p.Kennung + ";" +
+                                p.ImgFilePath + ";" +
+                                p.Vorname + ";" +
+                                p.Nachname + ";" +
+                                p.Geburtstag + ";" +
+                                p.Strasse + ";" +
+                                p.PLZ + ";" +
+                                p.Ort + ";" +
+                                p.TelNr + ";" +
+                                p.Email,
+                                Encoding.Default);
+                        }
                     }
                 }
             }

@@ -19,8 +19,18 @@
             <Calendar x:Name="cal_Kalender" SelectionMode="MultipleRange"/>
         </Viewbox>
         <Image x:Name="img_BDayToday" Source="/Torte.png" Grid.Column="0" Grid.Row="1" Margin="10"/>
-        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0">
-            <TextBox x:Name="txt_BDayKid" IsEnabled="False"/>
-        </StackPanel>
+        <ListView x:Name="LsV_BDayKids" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,10,0,10">
+            <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn x:Name="gvc_NN" Header="Nachname" DisplayMemberBinding="{Binding Nachname}"/>
+                    <GridViewColumn x:Name="gvc_VN" Header="Vorname" DisplayMemberBinding="{Binding Vorname}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

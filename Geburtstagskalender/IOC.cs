@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Geburtstagskalender
 {
@@ -13,17 +14,17 @@ namespace Geburtstagskalender
         public ObservableCollection<Person> CollOfPeople = new ObservableCollection<Person>();
         public ObservableCollection<Person> CollOfBDays = new ObservableCollection<Person>();
 
-        public Person GetBDayToday()
+        public List<Person> GetBDayToday()
         {
-            Person person1=null;
-            foreach(Person person in CollOfPeople)
+            List<Person> persons = new List<Person>();
+            foreach (Person person in CollOfPeople)
             {
-                if(person.Geburtstag.DayOfYear == DateTime.Today.DayOfYear)
+                if (person.Geburtstag.DayOfYear == DateTime.Today.DayOfYear)
                 {
-                    person1 = person;
+                    persons.Add(person);
                 }
             }
-            return person1;
+            return persons;
         }
 
         public List<Person> SearchPeople(string searchTxt)
@@ -122,20 +123,26 @@ namespace Geburtstagskalender
             List<Person> tmp2 = tmp.ToList();
             List<Person> tmp3 = tmp2.OrderBy(a => a.Geburtstag.DayOfYear).ToList();
             CollOfBDays.Clear();
-            for (int i = 0;i < tmp3.Count();i++)
+            try
             {
-                if (tmp3[i].Geburtstag.DayOfYear > DateTime.Today.DayOfYear)
+                for (int i = 0; i < tmp3.Count(); i++)
                 {
-                    CollOfBDays.Add(tmp3[i]);
+                    if (tmp3[i].Geburtstag.DayOfYear > DateTime.Today.DayOfYear)
+                    {
+                        CollOfBDays.Add(tmp3[i]);
+                        tmp3.RemoveAt(i);
+                    }
+                }
+                if (CollOfBDays.Count() < 5)
+                {
+                    for (int i = 0; CollOfBDays.Count() < 5; i++)
+                    {
+                        CollOfBDays.Add(tmp[i]);
+                        tmp3.RemoveAt(i);
+                    }
                 }
             }
-            if (CollOfBDays.Count() < 5)
-            {
-                for (int i = 0; CollOfBDays.Count() < 5; i++)
-                {
-                    CollOfBDays.Add(tmp[i]);
-                }
-            }
+            catch { }
         }
 
         public bool CheckEmail(string a)

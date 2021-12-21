@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 
 namespace Geburtstagskalender
 {
@@ -20,26 +21,56 @@ namespace Geburtstagskalender
     {
         private IOC ioc;
         private int mode;
+        //Color colore = (Color)ColorConverter.ConvertFromString("#FFABADB3");
+        SolidColorBrush brushRed = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFF0000"));
+        SolidColorBrush brushWhite = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFFFF"));
+        SolidColorBrush brushDefault = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFABADB3"));
+
+        private SolidColorBrush _brush;
+        public SolidColorBrush brush
+        {
+            get { return _brush; }
+            set
+            {
+                _brush = value;
+            }
+        }
+
+        public string Test = "Testwert";
 
         public Uc_AddUser(IOC ioc, int mode)
         {
             InitializeComponent();
             this.ioc = ioc;
             SwitchMode(1);
+            /*txt_Kennung.BorderBrush = brush;
+            txt_Vorname.BorderBrush = brush;
+            txt_Nachname.BorderBrush = brush;
+            txt_Geb.BorderBrush = brush;
+            txt_Strasse.BorderBrush = brush;
+            txt_PLZ.BorderBrush = brush;
+            txt_Ort.BorderBrush = brush;
+            txt_Tel.BorderBrush = brush;
+            txt_Email.BorderBrush = brush;*/
+            brush = brushDefault;
         }
 
         public void LoadUser(Person person)
         {
             if (mode != 0)
             {
-                if (person.ImgFilePath != null)
+                try
                 {
-                    img_profile.Source = new BitmapImage(new Uri(person.ImgFilePath));
+                    if (person.ImgFilePath != null)
+                    {
+                        img_profile.Source = new BitmapImage(new Uri(person.ImgFilePath));
+                    }
+                    else
+                    {
+                        img_profile.Source = null;
+                    }
                 }
-                else
-                {
-                    img_profile.Source = null;
-                }
+                catch { }
                 txt_Kennung.Text = person.Kennung;
                 txt_Vorname.Text = person.Vorname;
                 txt_Nachname.Text = person.Nachname;
@@ -72,6 +103,7 @@ namespace Geburtstagskalender
             switch (mode)
             {
                 case 0: //hinzufügen
+                    brush = brushDefault;
                     btn_Image.IsEnabled = true;
                     txt_Email.IsEnabled = true;
                     txt_Geb.IsEnabled = true;
@@ -87,6 +119,7 @@ namespace Geburtstagskalender
                     btn_edit.Visibility = Visibility.Hidden;
                     ClearUser(); break;
                 case 1: //anzeigen
+                    brush = brushWhite;
                     btn_Image.IsEnabled = false;
                     txt_Email.IsEnabled = false;
                     txt_Geb.IsEnabled = false;
@@ -101,6 +134,7 @@ namespace Geburtstagskalender
                     btn_confirm.Visibility = Visibility.Hidden;
                     btn_edit.Visibility = Visibility.Visible; break;
                 case 2: //bearbeiten
+                    brush = brushDefault;
                     btn_Image.IsEnabled = true;
                     txt_Email.IsEnabled = true;
                     txt_Geb.IsEnabled = true;
@@ -119,112 +153,133 @@ namespace Geburtstagskalender
 
         private void btn_confirm_Click(object sender, RoutedEventArgs e)
         {
+            bool fail = false;
             if (txt_Kennung.Text == "")
             {
-                txt_Kennung.Background = Brushes.Red;
+                brush = brushRed;
+                fail = true;
             }
             else
             {
-                txt_Kennung.Background = Brushes.White;
-                if (txt_Vorname.Text == "")
+                brush = brushDefault;
+            }
+            if (txt_Vorname.Text == "")
+            {
+                brush = brushRed;
+                fail = true;
+            }
+            else
+            {
+                brush = brushDefault;
+            }
+            if (txt_Nachname.Text == "")
+            {
+                brush = brushRed;
+                fail = true;
+            }
+            else
+            {
+                brush = brushDefault;
+            }
+            if (txt_Geb.Text == "")
+            {
+                brush = brushRed;
+                fail = true;
+            }
+            else
+            {
+                brush = brushDefault;
+            }
+            if (txt_Strasse.Text == "")
+            {
+                brush = brushRed;
+                fail = true;
+            }
+            else
+            {
+                brush = brushDefault;
+            }
+            if (txt_PLZ.Text == "")
+            {
+                brush = brushRed;
+                fail = true;
+            }
+            else
+            {
+                brush = brushDefault;
+            }
+            if (txt_Ort.Text == "")
+            {
+                brush = brushRed;
+                fail = true;
+            }
+            else
+            {
+                brush = brushDefault;
+            }
+            if (txt_Tel.Text == "")
+            {
+                brush = brushRed;
+                fail = true;
+            }
+            else
+            {
+                brush = brushDefault;
+            }
+            if (ioc.CheckEmail(txt_Email.Text))
+            {
+                brush = brushDefault;
+            }
+            else
+            {
+                brush = brushRed;
+                fail = true;
+            }
+            if (!fail)
+            {
+                try
                 {
-                    txt_Vorname.Background = Brushes.Red;
-                }
-                else
-                {
-                    txt_Vorname.Background = Brushes.White;
-                    if (txt_Nachname.Text == "")
+                    switch (mode)
                     {
-                        txt_Nachname.Background = Brushes.Red;
-                    }
-                    else
-                    {
-                        txt_Nachname.Background = Brushes.White;
-                        if (txt_Geb.Text == "")
-                        {
-                            txt_Geb.Background = Brushes.Red;
-                        }
-                        else
-                        {
-                            txt_Geb.Background = Brushes.White;
-                            if (txt_Strasse.Text == "")
+                        case 0:
+                            if ((BitmapImage)img_profile.Source == null)
                             {
-                                txt_Strasse.Background = Brushes.Red;
+                                ioc.AddPeople(txt_Kennung.Text, txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text);
                             }
                             else
                             {
-                                txt_Strasse.Background = Brushes.White;
-                                if (txt_PLZ.Text == "")
-                                {
-                                    txt_PLZ.Background = Brushes.Red;
-                                }
-                                else
-                                {
-                                    txt_PLZ.Background = Brushes.White;
-                                    if (txt_Ort.Text == "")
-                                    {
-                                        txt_Ort.Background = Brushes.Red;
-                                    }
-                                    else
-                                    {
-                                        txt_Ort.Background = Brushes.White;
-                                        if (txt_Tel.Text == "")
-                                        {
-                                            txt_Tel.Background = Brushes.Red;
-                                        }
-                                        else
-                                        {
-                                            txt_Tel.Background = Brushes.White;
-                                            if (ioc.CheckEmail(txt_Email.Text))
-                                            {
-                                                try
-                                                {
-                                                    switch (mode)
-                                                    {
-                                                        case 0:
-                                                            if ((BitmapImage)img_profile.Source == null)
-                                                            {
-                                                                ioc.AddPeople(txt_Kennung.Text, txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text);
-                                                            }
-                                                            else
-                                                            {
-                                                                ioc.AddPeople(txt_Kennung.Text, ((BitmapImage)img_profile.Source).UriSource.ToString(), txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text);
-                                                            }
-                                                            break;
-                                                        case 2:
-                                                            if ((BitmapImage)img_profile.Source == null)
-                                                            {
-                                                                ioc.ChangePeople(txt_Kennung.Text, txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text); break;
-                                                            }
-                                                            else
-                                                            {
-                                                                ioc.ChangePeople(txt_Kennung.Text, ((BitmapImage)img_profile.Source).UriSource.ToString(), txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text); break;
-                                                            }
-                                                    }
-                                                    SwitchMode(1);
-                                                }
-                                                catch
-                                                {
-                                                }
-                                                txt_Email.Background = Brushes.White;
-                                            }
-                                            else
-                                            {
-                                                txt_Email.Background = Brushes.Red;
-                                            }
-                                        }
-                                    }
-                                }
+                                ioc.AddPeople(txt_Kennung.Text, ((BitmapImage)img_profile.Source).UriSource.ToString(), txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text);
                             }
-                        }
+                            break;
+                        case 2:
+                            if ((BitmapImage)img_profile.Source == null)
+                            {
+                                ioc.ChangePeople(txt_Kennung.Text, txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text); break;
+                            }
+                            else
+                            {
+                                ioc.ChangePeople(txt_Kennung.Text, ((BitmapImage)img_profile.Source).UriSource.ToString(), txt_Vorname.Text, txt_Nachname.Text, Convert.ToDateTime(txt_Geb.Text), txt_Strasse.Text, txt_PLZ.Text, txt_Ort.Text, txt_Tel.Text, txt_Email.Text); break;
+                            }
                     }
+                    SwitchMode(1);
                 }
+                catch { }
             }
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
             SwitchMode(1);
+            txt_Kennung.BorderBrush = brushWhite;
+            txt_Vorname.BorderBrush = brushWhite;
+            txt_Nachname.BorderBrush = brushWhite;
+            txt_Strasse.BorderBrush = brushWhite;
+            txt_PLZ.BorderBrush = brushWhite;
+            txt_Ort.BorderBrush = brushWhite;
+            txt_Tel.BorderBrush = brushWhite;
+            txt_Email.BorderBrush = brushWhite;
+            txt_Geb.BorderBrush = brushWhite;
+            img_profile.Source = null;
         }
 
         private void btn_edit_Click(object sender, RoutedEventArgs e)
