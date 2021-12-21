@@ -8,6 +8,8 @@ namespace Geburtstagskalender
 {
     public class Person
     {
+        //Methoden
+
         //Attribute
         #region Personlich
         private string kennung;

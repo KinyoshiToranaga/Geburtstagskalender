@@ -13,12 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Geburtstagskalender
 {
     public partial class Uc_Kalender : UserControl
     {
         private List<Person> BDayKids;
+        IOC ioc;
 
         public Uc_Kalender()
         {

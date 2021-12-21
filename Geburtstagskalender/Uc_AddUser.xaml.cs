@@ -14,35 +14,48 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace Geburtstagskalender
 {
-    public partial class Uc_AddUser : UserControl
+    public partial class Uc_AddUser : UserControl,INotifyPropertyChanged
     {
         private IOC ioc;
         private int mode;
-        //Color colore = (Color)ColorConverter.ConvertFromString("#FFABADB3");
+
         SolidColorBrush brushRed = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFF0000"));
         SolidColorBrush brushWhite = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFFFF"));
         SolidColorBrush brushDefault = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFABADB3"));
-
         private SolidColorBrush _brush;
         public SolidColorBrush brush
         {
-            get { return _brush; }
+            get
+            {
+                return _brush;
+            }
             set
             {
                 _brush = value;
+                OnPropertyChanged("brush");
             }
         }
 
-        public string Test = "Testwert";
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         public Uc_AddUser(IOC ioc, int mode)
         {
             InitializeComponent();
             this.ioc = ioc;
+            brush = brushDefault;
             SwitchMode(1);
+            DataContext = this;
             /*txt_Kennung.BorderBrush = brush;
             txt_Vorname.BorderBrush = brush;
             txt_Nachname.BorderBrush = brush;
@@ -52,7 +65,6 @@ namespace Geburtstagskalender
             txt_Ort.BorderBrush = brush;
             txt_Tel.BorderBrush = brush;
             txt_Email.BorderBrush = brush;*/
-            brush = brushDefault;
         }
 
         public void LoadUser(Person person)
@@ -270,7 +282,7 @@ namespace Geburtstagskalender
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
             SwitchMode(1);
-            txt_Kennung.BorderBrush = brushWhite;
+            /*txt_Kennung.BorderBrush = brushWhite;
             txt_Vorname.BorderBrush = brushWhite;
             txt_Nachname.BorderBrush = brushWhite;
             txt_Strasse.BorderBrush = brushWhite;
@@ -278,7 +290,7 @@ namespace Geburtstagskalender
             txt_Ort.BorderBrush = brushWhite;
             txt_Tel.BorderBrush = brushWhite;
             txt_Email.BorderBrush = brushWhite;
-            txt_Geb.BorderBrush = brushWhite;
+            txt_Geb.BorderBrush = brushWhite;*/
             img_profile.Source = null;
         }
 
