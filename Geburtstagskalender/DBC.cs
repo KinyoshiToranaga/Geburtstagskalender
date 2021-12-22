@@ -10,8 +10,9 @@ namespace Geburtstagskalender
 {
     class DBC
     {
-        private static string directorypath = "C:\\" + System.Reflection.Assembly.GetEntryAssembly().GetName().Name;
-        private static string filepath = directorypath + "\\kalender.csv";
+        //private static string directorypath = "C:\\" + System.Reflection.Assembly.GetEntryAssembly().GetName().Name;
+        //private static string filepath = directorypath + "\\kalender.csv";
+        private static string filepath = AppDomain.CurrentDomain.BaseDirectory + "kalender.csv";
         private StreamReader reader;
         private StreamWriter writer;
 
