@@ -18,7 +18,7 @@ using System.ComponentModel;
 
 namespace Geburtstagskalender
 {
-    public partial class Uc_AddUser : UserControl,INotifyPropertyChanged
+    public partial class Uc_AddUser : UserControl, INotifyPropertyChanged
     {
         private IOC ioc;
         private int mode;
@@ -56,15 +56,6 @@ namespace Geburtstagskalender
             brush = brushDefault;
             SwitchMode(1);
             DataContext = this;
-            /*txt_Kennung.BorderBrush = brush;
-            txt_Vorname.BorderBrush = brush;
-            txt_Nachname.BorderBrush = brush;
-            txt_Geb.BorderBrush = brush;
-            txt_Strasse.BorderBrush = brush;
-            txt_PLZ.BorderBrush = brush;
-            txt_Ort.BorderBrush = brush;
-            txt_Tel.BorderBrush = brush;
-            txt_Email.BorderBrush = brush;*/
         }
 
         public void LoadUser(Person person)

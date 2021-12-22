@@ -14,9 +14,9 @@ namespace Geburtstagskalender
         public ObservableCollection<Person> CollOfPeople = new ObservableCollection<Person>();
         public ObservableCollection<Person> CollOfBDays = new ObservableCollection<Person>();
 
-        public List<Person> GetBDayToday()
+        public ObservableCollection<Person> GetBDayToday()
         {
-            List<Person> persons = new List<Person>();
+            ObservableCollection<Person> persons = new ObservableCollection<Person>();
             foreach (Person person in CollOfPeople)
             {
                 if (person.Geburtstag.DayOfYear == DateTime.Today.DayOfYear)

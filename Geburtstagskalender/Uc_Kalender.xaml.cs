@@ -19,21 +19,24 @@ namespace Geburtstagskalender
 {
     public partial class Uc_Kalender : UserControl
     {
-        private List<Person> BDayKids;
-        IOC ioc;
+        public ObservableCollection<Person> BDayKids = new ObservableCollection<Person>();
 
         public Uc_Kalender()
         {
             InitializeComponent();
+            DataContext = this;
             LsV_BDayKids.ItemsSource = BDayKids;
         }
 
-        public void ChangeVis(List<Person> persons)
+        public void ChangeVis(ObservableCollection<Person> persons)
         {
             if (persons.Count != 0 ? true : false)
             {
-                BDayKids = null;
-                BDayKids = persons;
+                BDayKids.Clear();
+                foreach(Person person in persons)
+                {
+                    BDayKids.Add(person);
+                }
                 LsV_BDayKids.Visibility = Visibility.Visible;
                 img_BDayToday.Visibility = Visibility.Visible;
             }
@@ -42,6 +45,11 @@ namespace Geburtstagskalender
                 LsV_BDayKids.Visibility = Visibility.Hidden;
                 img_BDayToday.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void GridViewColumnHeader_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
         }
     }
 }

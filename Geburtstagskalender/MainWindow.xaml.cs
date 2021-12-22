@@ -14,9 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 /*
-selected dates ersetzen
-Coloumnwidth anpassen
-Colorbinding fixen
+Coloumnwidth wird nicht direkt beim Start angepasst. Muss noch irgendwie dafür sorgen.
+selected dates selektiert halt nur. Soll eigenlich feste Felder markieren für die Geburtstage. Muss dafür was finden.
+Colorbinding hat im Endeffekt die Funktion zerstört die dem User mitteilt welches Feld nicht richtig ausgefüllt ist. War viel Arbeit. Bleibt so. Mach ich wann anders nochmal funktional.
 */
 namespace Geburtstagskalender
 {
@@ -38,6 +38,7 @@ namespace Geburtstagskalender
             ioc.GetPeople();
             ioc.GetBDays();
             kalender.ChangeVis(ioc.GetBDayToday());
+            namelist.ResizeColumns();
         }
 
         private void txt_search_TextChanged(object sender, TextChangedEventArgs e)
